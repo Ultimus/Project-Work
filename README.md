@@ -13,7 +13,7 @@ At first I will try to programm the examples of the following books in Julia and
 
 
 
-[probmods](https://probmods.org/inference-process.html#mh-on-program-executions)
+[probmods](https://probmods.org/)
 
 ##Contact Information
 For questions or critique write me an email to 
