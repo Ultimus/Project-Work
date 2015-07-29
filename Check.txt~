@@ -1,0 +1,14 @@
+(define (sample)
+  (define A (gaussian 1 1))
+  (define B (gaussian A 1))
+  (define C (gaussian A 1))
+  (define D (gaussian B (abs C)))
+  (if (< A D) (list A D) (sample))
+  )
+
+(sample)
+
+;;(hist (repeat 5 sample))
+   
+  
+;;(hist (repeat 1000 sample))

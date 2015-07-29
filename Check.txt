@@ -1,0 +1,9 @@
+(define (sample)
+  (define A (gaussian 1 1))
+  (define B (gaussian A 1))
+  (define C (gaussian A 1))
+  (define D (gaussian B (abs C)))
+  (if (and (< A D) (> A 0) (> B 0)) (list A D) (sample))
+  )
+   
+(scatter (repeat 1000 sample)"A and D; A < D, both grater 0 ")  

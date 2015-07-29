@@ -33,7 +33,7 @@ C = RV((x)-> Normal(x,1), null, [A],false)
 D = RV((x,y)-> Normal(x, abs(y)), null, [B,C], false)
 
 
-function sampleRV!(r :: RV)
+function sampleRV(r :: RV)
     if (r.value == null)
         ##needs work
         map(sampleRV, r.parents)
@@ -138,7 +138,3 @@ function tryit(i :: Array{Int,1})
   return map((x)-> x +1, i)
 
 end
-
-
-# Now a more functional approach
-
