@@ -33,43 +33,11 @@ function sampleRV(rs::Array{RV,1}, d=Dict())
     return [sampleRV(r,d) for r in rs]
 end
 
-#sample with a trace of needed variables. The parents are sampled too
-#a dictionary is returned with all RV's hash as keys
-function sampleRVTrace(r::RV)
-    function f!(r::RV, d::Dict{Any,Any})
-        key = hash(r)
-        if !haskey(d, key)
-            vals = map((s)->f!(s,d), r.parents)
-            d[key] = rand(r.distgenerator(vals...))
-        end
-        return d[key]
-    end
-    d = Dict()
-    f!(r, d)
-    return d
-end
-
-#same as sampleRVTrace but instead, the RV.name is used
-#this version allocates fewer bytes
-function sampleRVNTrace(r::RV)
-    function f!(r::RV, d::Dict{Any,Any})
-        key = r.name
-        if !haskey(d, key)
-            vals = map((s)->f!(s,d), r.parents)
-            d[key] = rand(r.distgenerator(vals...))
-        end
-        return d[key]
-    end
-    d = Dict()
-    f!(r, d)
-    return d
-end
-
 #samples a given RV n times. An array is returned, which containes all sampled values as Float64
 function sampleRVTimes(r::RV, n :: Integer)
-    result = Float64[]
+    result = Array(Float64,n)
     for i in 1:n
-        push!(result, sampleRV(r))
+        result[i] = sampleRV(r)
     end
     result
 end
